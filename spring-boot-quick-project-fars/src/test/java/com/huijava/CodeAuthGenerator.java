@@ -44,7 +44,7 @@ import java.util.Map;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
-@TestConfiguration("classpath:aplication.properties")
+@TestConfiguration("classpath:application.properties")
 @Data
 public class CodeAuthGenerator {
     private static final Logger LOGGER = LoggerFactory.getLogger(CodeAuthGenerator.class);
