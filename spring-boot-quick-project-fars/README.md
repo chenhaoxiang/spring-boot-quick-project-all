@@ -17,14 +17,14 @@ spring-boot-quick-project-fars全名为spring-boot-quick-project-front-and-rear-
 - 使用FastJsonHttpMessageConverter，提高JSON序列化速度
 - 集成MyBatis、通用Mapper插件、PageHelper分页插件，实现单表业务零SQL
 - 提供代码生成器根据表名生成对应的Entity、Mapper、MapperXML、Service、ServiceImpl、Controller等基础代码
-- Controller模板默认提供POST和RESTful两套，根据需求在```application-dev.properties```配置文件中自己配置`project.controller.ftl.model`，默认使用POST方式的模板。
+- Controller模板默认提供POST和RESTful两套，根据需求在```application-init.properties```配置文件中自己配置`project.controller.ftl.model`，默认使用POST方式的模板。
 - 代码模板可根据实际项目的需求来扩展，由于每个公司业务都不太一样，所以只提供了一些比较基础、通用的模板，**主要是提供一个思路**来减少重复代码的编写。
 - 在实际项目的使用中，可以根据公司业务的抽象编写大量的模板。另外，使用模板也有助于保持团队代码风格的统一 
 
  
 ## 快速开始
 1. 克隆项目到本地
-2. 对```src/resoucres```下的```application-dev.properties```进行配置，主要是JDBC，项目包名等配置
+2. 对```src/resoucres```下的```application-dev.properties，application-init.properties```进行配置，主要是JDBC，项目包名等配置
 3. 对```src/test```包内的代码生成器```CodeAuthGenerator```中的main测试方法进行配置，主要是配置需要生成的表名称，根据表名来生成代码
 4. 如果只是想测试的话，可以使用```src/test/resources```目录下的```sq-user.sql```，否则忽略该步
 5. 输入表名，运行```CodeAuthGenerator.main()```方法，生成基础代码（可能需要刷新项目目录才会出来）
