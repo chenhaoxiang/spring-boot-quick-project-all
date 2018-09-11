@@ -40,14 +40,19 @@ spring-boot-quick-project-fars全名为spring-boot-quick-project-front-and-rear-
 - 建议在公司内部使用[ShowDoc](https://github.com/star7th/showdoc)、[SpringFox-Swagger2](https://github.com/springfox/springfox) 、[RAP](https://github.com/thx/RAP)等开源项目来编写、管理API文档
  
 ## 项目中依赖的部分开源项目
-- Spring Boot（[项目地址](https://github.com/spring-projects/spring-boot)）
-- MyBatis（[文档地址](http://www.mybatis.org/mybatis-3/zh/index.html)）
-- MyBatisb通用Mapper插件（[文档地址](https://mapperhelper.github.io/docs/)）
-- MyBatis PageHelper分页插件（[文档地址](https://pagehelper.github.io/)）
-- Druid（[项目地址](https://github.com/alibaba/druid)）
-- Fastjson（[项目地址](https://github.com/alibaba/fastjson)）
-- Lombok([项目地址](https://github.com/rzwitserloot/lombok))
+- Spring Boot（[https://github.com/spring-projects/spring-boot](https://github.com/spring-projects/spring-boot)）
+- MyBatis（[http://www.mybatis.org/mybatis-3/zh/index.html](http://www.mybatis.org/mybatis-3/zh/index.html)）
+- MyBatisb通用Mapper插件（[https://mapperhelper.github.io/docs/](https://mapperhelper.github.io/docs/)）
+- MyBatis PageHelper分页插件（[https://pagehelper.github.io/](https://pagehelper.github.io/)）
+- Druid（[https://github.com/alibaba/druid](https://github.com/alibaba/druid)）
+- Fastjson（[https://github.com/alibaba/fastjson](https://github.com/alibaba/fastjson)）
+- Lombok([https://github.com/rzwitserloot/lombok](https://github.com/rzwitserloot/lombok))
+- XDoc ([https://gitee.com/treeleaf/xDoc](https://gitee.com/treeleaf/xDoc))
 - 其他略
+
+## 参考项目
+
+[spring-boot-api-project-seed](https://github.com/lihengming/spring-boot-api-project-seed)
 
 ## 其他
 如果需要新功能，欢迎大家提Issues，会考虑进行加入。

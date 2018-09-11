@@ -103,6 +103,15 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
+        <!--XDoc 快速文档构建框架
+        项目开源地址：https://gitee.com/treeleaf/xDoc-->
+        <dependency>
+            <groupId>com.github.treeleafj</groupId>
+            <artifactId>spring-boot-starter-xDoc</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
