@@ -1,5 +1,8 @@
-﻿## 简化你的开发，搭建完善的基础企业级项目  
-1.  数据库-dao-service-controller层的全自动化构建，实现单表操作全自动构建    
+﻿
+SpringBoot快速项目搭建
+
+## 简化你的开发，搭建完善的基础企业级项目  
+1. 数据库-dao-service-controller层的全自动化构建，实现单表操作全自动构建    
 2. 数据监控(druid)  
 3. 日志配置 (logback)   
 4. 邮件发送  
@@ -11,6 +14,7 @@
 10. 全局异常处理  
 11. 全局日志输出  
 12. Redis集成  
+13. Controller层自动文档构建，在线测试  
 ...
 
 ## [spring-boot-quick-project-fars](https://github.com/chenhaoxiang/spring-boot-quick-project-all/tree/master/spring-boot-quick-project-fars)
