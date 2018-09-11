@@ -50,8 +50,8 @@
 - XDoc ([https://gitee.com/treeleaf/xDoc](https://gitee.com/treeleaf/xDoc))
 - 其他略
 
-## XDoc 快速文档构建框架
-### 功能
+### XDoc 快速文档构建框架
+#### 功能
 基于java注释生成接口文档
 注释支持扩展
 接口框架支持扩展
@@ -59,7 +59,7 @@
 默认支持spring mvc规范
 默认支持spring-boot直接内嵌启动
 
-### 注意事项
+#### 注意事项
 在Controller层的@RequestMapping注解中的值，不能以"/"开头，否则生成的自动文档无法进行在线测试  
 例如：@RequestMapping("/user")需要写成@RequestMapping("user")  
 另外，不能在配置文件中配置spring.resources.add-mappings=false  
