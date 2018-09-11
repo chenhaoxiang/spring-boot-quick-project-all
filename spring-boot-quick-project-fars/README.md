@@ -1,9 +1,10 @@
 
 ## 简介
 [spring-boot-quick-project-fars](https://github.com/chenhaoxiang/spring-boot-quick-project-all/tree/master/spring-boot-quick-project-fars)全名为spring-boot-quick-project-front-and-rear-separation    
-是一基于SpringBoot,MyBatis等开源框架快速构建CSD（Controller-Service-DAO）层的项目，用于快速搭建中小型的API、RESTful API项目。使用简单，运行稳定快捷，让我们摆脱重复的劳动，专注业务代码的编写。  
-下面是一个简单的视频Demo，基于本项目可以在短短几分钟内实现一套简单的API，并运行提供增删改查服务。    
+是一基于SpringBoot,MyBatis等开源框架快速构建CSD（Controller-Service-DAO）层的项目，用于快速搭建中小型的API、RESTful API项目。使用简单，运行稳定快捷，摆脱重复的劳动，专注业务代码的编写。  
+下面是一个简单的视频Demo，基于本项目可以在短短几分钟内实现一套简单的API，0代码编写实现单表的任意增删改查操作。         
 
+### 演示视频
 [![YouTube](http://blogimg.chenhaoxiang.cn/18-9-3/22718315.jpg)](https://youtu.be/_I4PSA4obPs)
 点击图片打开演示视频，打不开的需要翻墙~~  
 
