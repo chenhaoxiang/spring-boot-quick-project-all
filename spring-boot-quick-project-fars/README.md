@@ -68,7 +68,11 @@ spring-boot-quick-project-fars全名为spring-boot-quick-project-front-and-rear-
 
 ## 访问
 本地运行项目后，直接在浏览器中输入[http://localhost:8080/xdoc/index.html](http://localhost:8080/xdoc/index.html)访问即可  
-![演示](http://blogimg.chenhaoxiang.cn/18-9-11/60930327.jpg)
+![演示](http://blogimg.chenhaoxiang.cn/18-9-11/60930327.jpg)  
+**点击最右边的测试**  
+![演示](http://blogimg.chenhaoxiang.cn/18-9-11/36345891.jpg)   
+**可输入参数进行测试**
+
 
 ## 参考项目
 

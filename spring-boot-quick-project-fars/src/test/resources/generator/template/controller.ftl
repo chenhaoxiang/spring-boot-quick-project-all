@@ -31,7 +31,7 @@ public class ${modelNameUpperCamel}Controller {
      * @param ${modelNameLowerCamel} 对象
      * @return ResultModel统一响应结果
      */
-    @PostMapping("/add")
+    @PostMapping("add")
     @ResponseBody
     public ResultModel add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.insert(${modelNameLowerCamel});
@@ -43,7 +43,7 @@ public class ${modelNameUpperCamel}Controller {
      * @param id 主键
      * @return ResultModel统一响应结果
      */
-    @PostMapping("/delete")
+    @PostMapping("delete")
     @ResponseBody
     public ResultModel delete(@RequestParam Integer id) {
         ${modelNameLowerCamel}Service.deleteById(id);
@@ -55,7 +55,7 @@ public class ${modelNameUpperCamel}Controller {
      * @param ${modelNameLowerCamel} 对象中必须有ID主键
      * @return ResultModel统一响应结果
      */
-    @PostMapping("/update")
+    @PostMapping("update")
     @ResponseBody
     public ResultModel update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.updateById(${modelNameLowerCamel});
@@ -67,7 +67,7 @@ public class ${modelNameUpperCamel}Controller {
      * @param id 主键
      * @return ResultModel统一响应结果
      */
-    @PostMapping("/detail")
+    @PostMapping("detail")
     @ResponseBody
     public ResultModel detail(@RequestParam Integer id) {
         ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.selectById(id);
@@ -80,7 +80,7 @@ public class ${modelNameUpperCamel}Controller {
      * @param size 每页的条数 默认为0 查询所有
      * @return ResultModel统一响应结果
      */
-    @PostMapping("/list")
+    @PostMapping("list")
     @ResponseBody
     public ResultModel list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);

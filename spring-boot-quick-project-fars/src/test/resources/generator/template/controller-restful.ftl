@@ -45,7 +45,7 @@ public class ${modelNameUpperCamel}Controller {
      * @param id 主键
      * @return ResultModel统一响应结果
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResultModel delete(@PathVariable Integer id) {
         ${modelNameLowerCamel}Service.deleteById(id);
         return ResultModel.success();
@@ -67,7 +67,7 @@ public class ${modelNameUpperCamel}Controller {
      * @param id 主键
      * @return ResultModel统一响应结果
      */
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResultModel detail(@PathVariable Integer id) {
         ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.selectById(id);
         return ResultModel.success(${modelNameLowerCamel});

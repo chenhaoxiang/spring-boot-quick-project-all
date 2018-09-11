@@ -402,7 +402,9 @@ public class CodeAuthGenerator {
     private String tableNameConvertMappingPath(String tableName) {
         //兼容使用大写的表名
         tableName = tableName.toLowerCase();
-        return "/" + (tableName.contains("_") ? tableName.replaceAll("_", "/") : tableName);
+//        return "/" + (tableName.contains("_") ? tableName.replaceAll("_", "/") : tableName);
+        //为了兼容XDoc，最开始不使用"/"开头
+        return (tableName.contains("_") ? tableName.replaceAll("_", "/") : tableName);
     }
 
     private String modelNameConvertMappingPath(String modelName) {
