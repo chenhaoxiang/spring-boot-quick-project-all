@@ -64,7 +64,42 @@ spring-boot-quick-project-fars全名为spring-boot-quick-project-front-and-rear-
 例如：@RequestMapping("/user")需要写成@RequestMapping("user")  
 另外，不能在配置文件中配置spring.resources.add-mappings=false  
 生成环境下开启了XDoc，可能会造成jar包稍微大一些  
-暂时未发现其他的Bug，如果后期有时间，可能会对于XDoc进行一些改造  
+如Controller中方法参数为POJO对象（例如User对象），则使用XDoc传值测试比较麻烦  
+如果需要测试，则进行传JSON字符串，并且在方法的对象前添加RequestBody注解  
+```
+    @PostMapping("add")
+    @ResponseBody
+    public ResultModel add(@RequestBody User user) {
+        userService.insert(user);
+        return ResultModel.success();
+    }
+```
+经过测试发现，该种方法无法实现使用XDoc传输对象的JSON字符串测试。  
+XDoc前端的测试会将对象当做String进行传输    
+例如：
+在测试中 接口地址: user/add，在XDoc接口进行传值
+```
+{
+    "username": "123456",
+    "password": "123456",
+    "salt": "12555",
+    "age": 21,
+    "status": 1
+}
+```
+![例如该图](http://blogimg.chenhaoxiang.cn/18-9-11/27273170.jpg)  
+
+在XDoc的测试中，会进行一个赋值，并且将参数名称带上，作为key=value传递到Controller层的方法上。  
+那么在fastJson进行解析的时候得到的字符串是：
+```
+user={    "username": "123456",    "password": "123456",    "salt": "12555",    "age": 21,    "status": 1}
+```
+所以会出现下面的异常  
+```
+nested exception is com.alibaba.fastjson.JSONException: syntax error, expect {, actual ident, pos 0, fastjson-version 1.2.49
+```
+
+暂时未进行XDoc框架的其他Bug测试，如果后期有时间，可能会对于XDoc进行一些改造  
 
 ## 访问
 本地运行项目后，直接在浏览器中输入[http://localhost:8080/xdoc/index.html](http://localhost:8080/xdoc/index.html)访问即可  
