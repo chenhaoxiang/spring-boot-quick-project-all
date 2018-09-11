@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 异常捕获类
+ * 暂未开启404状态拦截
  * @author chenhx
  * @version ExceptionHandler.java, v 0.1 2018-09-03 下午 7:41
  */

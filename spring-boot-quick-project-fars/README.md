@@ -50,6 +50,26 @@ spring-boot-quick-project-fars全名为spring-boot-quick-project-front-and-rear-
 - XDoc ([https://gitee.com/treeleaf/xDoc](https://gitee.com/treeleaf/xDoc))
 - 其他略
 
+## XDoc 快速文档构建框架
+### 功能
+基于java注释生成接口文档
+注释支持扩展
+接口框架支持扩展
+默认支持markdown和离线/在线html等格式的文档
+默认支持spring mvc规范
+默认支持spring-boot直接内嵌启动
+
+### 注意事项
+在Controller层的@RequestMapping注解中的值，不能以"/"开头，否则生成的自动文档无法进行在线测试  
+例如：@RequestMapping("/user")需要写成@RequestMapping("user")  
+另外，不能在配置文件中配置spring.resources.add-mappings=false  
+生成环境下开启了XDoc，可能会造成jar包稍微大一些  
+暂时未发现其他的Bug，如果后期有时间，可能会对于XDoc进行一些改造  
+
+## 访问
+本地运行项目后，直接在浏览器中输入[http://localhost:8080/xdoc/index.html](http://localhost:8080/xdoc/index.html)访问即可  
+![演示](http://blogimg.chenhaoxiang.cn/18-9-11/60930327.jpg)
+
 ## 参考项目
 
 [spring-boot-api-project-seed](https://github.com/lihengming/spring-boot-api-project-seed)
