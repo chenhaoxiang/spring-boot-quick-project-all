@@ -123,6 +123,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+
+        <!--扩展类-->
+        <dependency>
+            <groupId>xyz.mrwood.mybatis.generator.plugin</groupId>
+            <artifactId>mybatis-generator-plugin</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

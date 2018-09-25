@@ -261,12 +261,27 @@ public class CodeAuthGenerator {
         jdbcConnectionConfiguration.setUserId(getJdbcUsername());
         jdbcConnectionConfiguration.setPassword(getJdbcPassword());
         jdbcConnectionConfiguration.setDriverClass(getJdbcDiverClassName());
+        //设置获取表的注释
+        jdbcConnectionConfiguration.addProperty("useInformationSchema", "true");
         context.setJdbcConnectionConfiguration(jdbcConnectionConfiguration);
 
         PluginConfiguration pluginConfiguration = new PluginConfiguration();
         pluginConfiguration.setConfigurationType("tk.mybatis.mapper.generator.MapperPlugin");
         pluginConfiguration.addProperty("mappers", getBaseMapperClassName());
         context.addPluginConfiguration(pluginConfiguration);
+        //扩展类
+//        PluginConfiguration extPlugin = new PluginConfiguration();
+//        extPlugin.setConfigurationType("xyz.mrwood.mybatis.generator.plugin.plugins.ExtPlugin");
+//        context.addPluginConfiguration(extPlugin);
+        //toString
+        PluginConfiguration toStringPlugin = new PluginConfiguration();
+        toStringPlugin.setConfigurationType("org.mybatis.generator.plugins.ToStringPlugin");
+        context.addPluginConfiguration(toStringPlugin);
+        //序列化
+        PluginConfiguration serializablePlugin = new PluginConfiguration();
+        serializablePlugin.setConfigurationType("org.mybatis.generator.plugins.SerializablePlugin");
+        context.addPluginConfiguration(serializablePlugin);
+
 
         JavaModelGeneratorConfiguration javaModelGeneratorConfiguration = new JavaModelGeneratorConfiguration();
         javaModelGeneratorConfiguration.setTargetProject(PROJECT_PATH + getJavaPath());
@@ -289,7 +304,8 @@ public class CodeAuthGenerator {
         if (StringUtils.isNotEmpty(modelName)){
             tableConfiguration.setDomainObjectName(modelName);
         }
-        tableConfiguration.setGeneratedKey(new GeneratedKey("id", "Mysql", true, null));
+        tableConfiguration.setGeneratedKey(new GeneratedKey("id", "Mysql"
+                , true, null));
         context.addTableConfiguration(tableConfiguration);
 
         List<String> warnings;
