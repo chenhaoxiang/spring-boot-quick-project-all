@@ -67,12 +67,19 @@
             <artifactId>mapper</artifactId>
             <version>4.0.4</version>
         </dependency>
-        <!--分页插件-->
+        <!--分页插件 ，这个依赖会无法分页，少了pagehelper-spring-boot-autoconfigure依赖-->
+        <!--<dependency>-->
+        <!--<groupId>com.github.pagehelper</groupId>-->
+        <!--<artifactId>pagehelper</artifactId>-->
+        <!--<version>5.1.2</version>-->
+        <!--</dependency>-->
+        <!--springboot环境下，进行条件查询后再分页，需要下面的依赖才行！！！-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>5.1.2</version>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.7</version>
         </dependency>
+
         <!--阿里 FastJson依赖-->
         <dependency>
             <groupId>com.alibaba</groupId>
