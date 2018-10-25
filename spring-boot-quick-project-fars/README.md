@@ -30,7 +30,7 @@
 4. 如果只是想测试的话，可以使用```src/test/resources```目录下的```sq-user.sql```，否则忽略该步
 5. 输入表名，运行```CodeAuthGenerator.main()```方法，生成基础代码（可能需要刷新项目目录才会出来）
 6. 根据业务在基础代码上进行扩展
-7. 对开发环境配置文件```application-dev.properties```进行配置，启动项目即可。
+7. 对开发环境配置文件```application-dev.properties```进行配置，启动项目即可   
 
 ## 开发建议
 - 表名，建议使用小写，多个单词使用下划线拼接
@@ -38,7 +38,10 @@
 - 建议业务失败直接使用```ServiceException("message")```抛出，由统一异常处理器来封装业务失败的响应结果，比如```throw new ServiceException("该手机号已被注册")```，会直接被封装为```{"code":400,"message":"该手机号已被注册"}```返回，无需自己处理，尽情抛出
 - 需要工具类的话建议先从```apache-commons-*```和```guava```中找，实在没有再造轮子或引入类库，尽量精简项目
 - 开发规范建议遵循（[阿里巴巴Java开发手册](https://github.com/alibaba/p3c))
-- 建议在公司内部使用[ShowDoc](https://github.com/star7th/showdoc)、[SpringFox-Swagger2](https://github.com/springfox/springfox) 、[RAP](https://github.com/thx/RAP)等开源项目来编写、管理API文档
+- 建议在公司内部使用[ShowDoc](https://github.com/star7th/showdoc)、[SpringFox-Swagger2](https://github.com/springfox/springfox) 、[RAP](https://github.com/thx/RAP)等开源项目来编写、管理API文档  
+- 重复生成代码，若Service层和Controller层的接口或者代码已经存在，不会重复生成覆盖   
+- 通过通用Mapper中Example的操作，可以完成单表的任意增删改查  
+- 建议项目中不要有级联操作，全部使用单表的查询，方便代码解耦以及后期项目维护、项目分布式改造，增加缓存等等  
  
 ## 项目中依赖的部分开源项目
 - Spring Boot（[https://github.com/spring-projects/spring-boot](https://github.com/spring-projects/spring-boot)）
