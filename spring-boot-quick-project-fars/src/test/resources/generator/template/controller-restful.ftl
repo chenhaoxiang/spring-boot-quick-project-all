@@ -83,7 +83,7 @@ public class ${modelNameUpperCamel}Controller {
     public ResultModel list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.selectAll();
-        PageInfo pageInfo = new PageInfo(list);
+        PageInfo<${modelNameUpperCamel}> pageInfo = new PageInfo<>(list);
         return ResultModel.success(pageInfo);
     }
 

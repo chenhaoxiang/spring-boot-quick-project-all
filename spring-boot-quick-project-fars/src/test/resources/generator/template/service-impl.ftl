@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @date ${date}
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class ${modelNameUpperCamel}ServiceImpl extends AbstractService<${modelNameUpperCamel}> implements ${modelNameUpperCamel}Service {
     @Autowired
     private ${modelNameUpperCamel}Mapper ${modelNameLowerCamel}Mapper;

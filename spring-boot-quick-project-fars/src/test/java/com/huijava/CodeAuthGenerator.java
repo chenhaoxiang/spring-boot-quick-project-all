@@ -341,7 +341,7 @@ public class CodeAuthGenerator {
             data.put("author", getAuthor());
             String modelNameUpperCamel = StringUtils.isEmpty(modelName) ? tableNameConvertUpperCamel(tableName) : modelName;
             data.put("modelNameUpperCamel", modelNameUpperCamel);
-            data.put("modelNameLowerCamel", tableNameConvertLowerCamel(tableName));
+            data.put("modelNameLowerCamel", CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, modelNameUpperCamel));
             data.put("basePackage", getNewBasePackage());
             data.put("serviceImplPackage", getServiceImplPackage());
             data.put("servicePackage", getServicePackage());
@@ -349,21 +349,28 @@ public class CodeAuthGenerator {
             data.put("mapperPackage", getMapperPackage());
 
             File file = new File(PROJECT_PATH + getJavaPath() + packageConvertPath(getServicePackage()) + modelNameUpperCamel + "Service.java");
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
+            if (file.exists()) {
+                LOGGER.info("{}已经存在，不进行生成", file);
+                return;
+            }
+            if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
+                LOGGER.error("{}生成失败", file.getParentFile());
+                return;
             }
             cfg.getTemplate("service.ftl").process(data,
                     new FileWriter(file));
-            LOGGER.info("====={}Service.java 生成成功",modelNameUpperCamel);
+            LOGGER.info("{}生成成功", file);
 
             File file1 = new File(PROJECT_PATH + getJavaPath() +  packageConvertPath(packageConvertPath(getServiceImplPackage())) + modelNameUpperCamel + "ServiceImpl.java");
-            if (!file1.getParentFile().exists()) {
-                file1.getParentFile().mkdirs();
+            if (!file1.getParentFile().exists() && !file1.getParentFile().mkdirs()) {
+                LOGGER.error("{}生成失败", file1.getParentFile());
+                return;
             }
+
             cfg.getTemplate("service-impl.ftl").process(data,
                     new FileWriter(file1));
 
-            LOGGER.info("====={}ServiceImpl.java 生成成功",modelNameUpperCamel);
+            LOGGER.info("{}生成成功", file1);
         } catch (Exception e) {
             throw new RuntimeException("生成Service失败", e);
         }
@@ -386,12 +393,17 @@ public class CodeAuthGenerator {
             data.put("controllerPackage", getControllerPackage());
 
             File file = new File(PROJECT_PATH + getJavaPath() + packageConvertPath(getControllerPackage()) + modelNameUpperCamel + "Controller.java");
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
+            if (file.exists()) {
+                LOGGER.info("{}已经存在，不进行生成", file);
+                return;
+            }
+            if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
+                LOGGER.error("{}生成失败", file.getParentFile());
+                return;
             }
             cfg.getTemplate(controllerFtlModel).process(data, new FileWriter(file));
 
-            LOGGER.info("====={}Controller.java 生成成功",modelNameUpperCamel);
+            LOGGER.info("{}生成成功", file);
         } catch (Exception e) {
             throw new RuntimeException("生成Controller失败", e);
         }
