@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${project.new-base-package}.mapper.BlogsMapper">
+  <resultMap id="BaseResultMap" type="${project.new-base-package}.entity.Blogs">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="blog_token" jdbcType="VARCHAR" property="blogToken" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="original_url" jdbcType="VARCHAR" property="originalUrl" />
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="top_count" jdbcType="INTEGER" property="topCount" />
+    <result column="view_count" jdbcType="INTEGER" property="viewCount" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
+    <result column="category_name_en" jdbcType="VARCHAR" property="categoryNameEn" />
+    <result column="create_id" jdbcType="INTEGER" property="createId" />
+    <result column="update_id" jdbcType="INTEGER" property="updateId" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="ext1" jdbcType="VARCHAR" property="ext1" />
+    <result column="ext2" jdbcType="VARCHAR" property="ext2" />
+    <result column="ext3" jdbcType="VARCHAR" property="ext3" />
+    <result column="collect_count" jdbcType="INTEGER" property="collectCount" />
+    <result column="original" jdbcType="TINYINT" property="original" />
+    <result column="platform_name_en" jdbcType="VARCHAR" property="platformNameEn" />
+    <result column="look_status" jdbcType="TINYINT" property="lookStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, blog_token, author, summary, original_url, publish_time, create_time, 
+    update_time, status, top_count, view_count, comment_count, category_name_en, create_id, 
+    update_id, version, ext1, ext2, ext3, collect_count, original, platform_name_en, 
+    look_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blogs
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blogs
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="${project.new-base-package}.entity.Blogs">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blogs (title, blog_token, author, 
+      summary, original_url, publish_time, 
+      create_time, update_time, status, 
+      top_count, view_count, comment_count, 
+      category_name_en, create_id, update_id, 
+      version, ext1, ext2, 
+      ext3, collect_count, original, 
+      platform_name_en, look_status)
+    values (#{title,jdbcType=VARCHAR}, #{blogToken,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{summary,jdbcType=VARCHAR}, #{originalUrl,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{topCount,jdbcType=INTEGER}, #{viewCount,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, 
+      #{categoryNameEn,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER}, #{updateId,jdbcType=INTEGER}, 
+      #{version,jdbcType=INTEGER}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, 
+      #{ext3,jdbcType=VARCHAR}, #{collectCount,jdbcType=INTEGER}, #{original,jdbcType=TINYINT}, 
+      #{platformNameEn,jdbcType=VARCHAR}, #{lookStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="${project.new-base-package}.entity.Blogs">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blogs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="blogToken != null">
+        blog_token,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+      <if test="originalUrl != null">
+        original_url,
+      </if>
+      <if test="publishTime != null">
+        publish_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="topCount != null">
+        top_count,
+      </if>
+      <if test="viewCount != null">
+        view_count,
+      </if>
+      <if test="commentCount != null">
+        comment_count,
+      </if>
+      <if test="categoryNameEn != null">
+        category_name_en,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="updateId != null">
+        update_id,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="ext1 != null">
+        ext1,
+      </if>
+      <if test="ext2 != null">
+        ext2,
+      </if>
+      <if test="ext3 != null">
+        ext3,
+      </if>
+      <if test="collectCount != null">
+        collect_count,
+      </if>
+      <if test="original != null">
+        original,
+      </if>
+      <if test="platformNameEn != null">
+        platform_name_en,
+      </if>
+      <if test="lookStatus != null">
+        look_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="blogToken != null">
+        #{blogToken,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="originalUrl != null">
+        #{originalUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="topCount != null">
+        #{topCount,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null">
+        #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="categoryNameEn != null">
+        #{categoryNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="updateId != null">
+        #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="ext1 != null">
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="collectCount != null">
+        #{collectCount,jdbcType=INTEGER},
+      </if>
+      <if test="original != null">
+        #{original,jdbcType=TINYINT},
+      </if>
+      <if test="platformNameEn != null">
+        #{platformNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="lookStatus != null">
+        #{lookStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="${project.new-base-package}.entity.Blogs">
+    update blogs
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="blogToken != null">
+        blog_token = #{blogToken,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="originalUrl != null">
+        original_url = #{originalUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="topCount != null">
+        top_count = #{topCount,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null">
+        view_count = #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        comment_count = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="categoryNameEn != null">
+        category_name_en = #{categoryNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="updateId != null">
+        update_id = #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="ext1 != null">
+        ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="collectCount != null">
+        collect_count = #{collectCount,jdbcType=INTEGER},
+      </if>
+      <if test="original != null">
+        original = #{original,jdbcType=TINYINT},
+      </if>
+      <if test="platformNameEn != null">
+        platform_name_en = #{platformNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="lookStatus != null">
+        look_status = #{lookStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="${project.new-base-package}.entity.Blogs">
+    update blogs
+    set title = #{title,jdbcType=VARCHAR},
+      blog_token = #{blogToken,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      original_url = #{originalUrl,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      top_count = #{topCount,jdbcType=INTEGER},
+      view_count = #{viewCount,jdbcType=INTEGER},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      category_name_en = #{categoryNameEn,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=INTEGER},
+      update_id = #{updateId,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
+      ext1 = #{ext1,jdbcType=VARCHAR},
+      ext2 = #{ext2,jdbcType=VARCHAR},
+      ext3 = #{ext3,jdbcType=VARCHAR},
+      collect_count = #{collectCount,jdbcType=INTEGER},
+      original = #{original,jdbcType=TINYINT},
+      platform_name_en = #{platformNameEn,jdbcType=VARCHAR},
+      look_status = #{lookStatus,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

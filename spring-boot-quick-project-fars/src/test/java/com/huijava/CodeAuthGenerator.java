@@ -21,6 +21,9 @@ import org.mybatis.generator.config.PluginConfiguration;
 import org.mybatis.generator.config.PropertyRegistry;
 import org.mybatis.generator.config.SqlMapGeneratorConfiguration;
 import org.mybatis.generator.config.TableConfiguration;
+import org.mybatis.generator.config.xml.ConfigurationParser;
+import org.mybatis.generator.exception.InvalidConfigurationException;
+import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.DefaultShellCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +35,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,19 +48,39 @@ import java.util.Map;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
-@TestConfiguration("classpath:application.properties")
+@TestConfiguration("classpath:application.properties,generator.properties")
 @Data
 public class CodeAuthGenerator {
     private static final Logger LOGGER = LoggerFactory.getLogger(CodeAuthGenerator.class);
+
+    /**
+     * 一定不要忘记指定数据库！！！！
+     */
+    private static final String CATALOG = "copyfuture";
+
     @Test
-    public void main(){
+    public void main() throws InterruptedException, SQLException, InvalidConfigurationException, XMLParserException, IOException {
         String[] tablesNames = jdbcTableNames.split(";");
         //生成代码
         authCreateCode(tablesNames);
         //重命名包名
-        renamePackage(getJavaPath());
-        renamePackage(getTestPath());
+//        renamePackage(getJavaPath());
+//        renamePackage(getTestPath());
     }
+
+    /**
+     * 通过数据表名称，和自定义的 Model 名称生成代码
+     * 如输入表名称 "sq_user" 和自定义的 Model 名称 "User" 将生成 User、UserMapper、UserService ...
+     * @param tableName 数据表名称
+     * @param modelName 自定义的 Model 名称
+     */
+    public void genCodeByCustomModelName(String tableName, String modelName) throws InterruptedException, SQLException, InvalidConfigurationException, XMLParserException, IOException {
+        genXmlModelAndMapper(tableName, modelName);
+//        genModelAndMapper(tableName, modelName);
+//        genService(tableName, modelName);
+//        genController(tableName, modelName);
+    }
+
 
     /**
      * 项目的开始基础包名称。请不要修改该包
@@ -223,7 +247,7 @@ public class CodeAuthGenerator {
      * 如输入表名称 "sq_user" 将生成 SqUser、SqUserMapper、SqUserService、SqUserController
      * @param tableNames 数据表名称...
      */
-    public void authCreateCode(String... tableNames) {
+    public void authCreateCode(String... tableNames) throws InterruptedException, SQLException, InvalidConfigurationException, XMLParserException, IOException {
         for (String tableName : tableNames) {
             if(getIgnorePrefix().equals(0)){
                 genCodeByCustomModelName(tableName, null);
@@ -236,27 +260,27 @@ public class CodeAuthGenerator {
         }
     }
 
-    /**
-     * 通过数据表名称，和自定义的 Model 名称生成代码
-     * 如输入表名称 "sq_user" 和自定义的 Model 名称 "User" 将生成 User、UserMapper、UserService ...
-     * @param tableName 数据表名称
-     * @param modelName 自定义的 Model 名称
-     */
-    public void genCodeByCustomModelName(String tableName, String modelName) {
-        genModelAndMapper(tableName, modelName);
-        genService(tableName, modelName);
-        genController(tableName, modelName);
-    }
 
+    public void genXmlModelAndMapper(String tableName, String modelName) throws InterruptedException, SQLException, IOException, XMLParserException, InvalidConfigurationException {
+        File configFile = new File("src/test/resources/generatorConfig.xml");
+        List<String> warnings = new ArrayList<String>();
+        ConfigurationParser cp = new ConfigurationParser(warnings);
+        Configuration config = cp.parseConfiguration(configFile);
+        DefaultShellCallback callback = new DefaultShellCallback(true);
+        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+        myBatisGenerator.generate(null);
+    }
 
     public void genModelAndMapper(String tableName, String modelName) {
         Context context = new Context(ModelType.FLAT);
         context.setId("spring-boot-quick-project");
         context.setTargetRuntime("MyBatis3Simple");
+        //设置属性值
         context.addProperty(PropertyRegistry.CONTEXT_BEGINNING_DELIMITER, "`");
         context.addProperty(PropertyRegistry.CONTEXT_ENDING_DELIMITER, "`");
 
         JDBCConnectionConfiguration jdbcConnectionConfiguration = new JDBCConnectionConfiguration();
+        //数据库链接URL，用户名、密码
         jdbcConnectionConfiguration.setConnectionURL(getJdbcUrl());
         jdbcConnectionConfiguration.setUserId(getJdbcUsername());
         jdbcConnectionConfiguration.setPassword(getJdbcPassword());
@@ -301,12 +325,18 @@ public class CodeAuthGenerator {
 
         TableConfiguration tableConfiguration = new TableConfiguration(context);
         tableConfiguration.setTableName(tableName);
+
+        //TODO 必须指定数据库，否则会出现找到多个的情况。在实体类上会带表全名，待确认优化
+        tableConfiguration.setSchema(CATALOG);
+        tableConfiguration.setCatalog(CATALOG);
+
         if (StringUtils.isNotEmpty(modelName)){
             tableConfiguration.setDomainObjectName(modelName);
         }
         tableConfiguration.setGeneratedKey(new GeneratedKey("id", "Mysql"
                 , true, null));
         context.addTableConfiguration(tableConfiguration);
+
 
         List<String> warnings;
         MyBatisGenerator generator;
