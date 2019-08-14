@@ -64,8 +64,8 @@ public class CodeAuthGenerator {
         //生成代码
         authCreateCode(tablesNames);
         //重命名包名
-//        renamePackage(getJavaPath());
-//        renamePackage(getTestPath());
+        renamePackage(getJavaPath());
+        renamePackage(getTestPath());
     }
 
     /**
@@ -76,9 +76,9 @@ public class CodeAuthGenerator {
      */
     public void genCodeByCustomModelName(String tableName, String modelName) throws InterruptedException, SQLException, InvalidConfigurationException, XMLParserException, IOException {
         genXmlModelAndMapper(tableName, modelName);
-//        genModelAndMapper(tableName, modelName);
-//        genService(tableName, modelName);
-//        genController(tableName, modelName);
+        genModelAndMapper(tableName, modelName);
+        genService(tableName, modelName);
+        genController(tableName, modelName);
     }
 
 
